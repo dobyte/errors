@@ -41,7 +41,7 @@ func WithError(cause, err error) error
 func Cause(err error) error
 ```
 
-Error Build Mode
+## Error Build Mode
 
 ![error build mode](./mode.png "error build mode")
 
