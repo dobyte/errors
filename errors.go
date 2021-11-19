@@ -94,10 +94,12 @@ func (w *withError) Format(s fmt.State, verb rune) {
 	}
 }
 
+// WrapMessage Wrap a new error with message and stack.
 func WrapMessage(message string) error {
 	return &withStackMessage{message, callers()}
 }
 
+// WrapError Wrap a new error with error and stack.
 func WrapError(err error) error {
 	if err == nil {
 		return nil
@@ -105,6 +107,7 @@ func WrapError(err error) error {
 	return &withStackError{err, callers()}
 }
 
+// WithMessage Create a new error with message on top of the original error.
 func WithMessage(cause error, message string) error {
 	if cause == nil {
 		return nil
@@ -117,6 +120,7 @@ func WithMessage(cause error, message string) error {
 	}
 }
 
+// WithError Create a new error with error on top of the original error.
 func WithError(cause, err error) error {
 	if cause == nil {
 		return nil
@@ -129,6 +133,7 @@ func WithError(cause, err error) error {
 	}
 }
 
+// Cause Recursively find the root cause of the error
 func Cause(err error) error {
 	type causer interface {
 		Cause() error
